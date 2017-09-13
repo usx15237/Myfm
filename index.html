@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script src="js/dealLrc.js"></script>
+</head>
+<body>
+	<audio id="music" src=""></audio>
+	<header>
+		<h2 id="sing-name"></h2>
+		<p  id="singer-name"></p>
+	</header>
+	<main> 
+	</main>
+	<div id="lrc"></div>
+	<input id="proce" type="range" name="name" value="0" max="50">
+	<footer>
+		<ul>
+			<li id="trigger">暂停</li>
+			<li id="next">下一首</li>
+			<li id="loop">列表循环</li>
+			<li id="proce"><span id="total"></span></li>
+		</ul>
+	</footer>
+	
+	<script>
+		var musicList = [{
+			src: 'http://music.163.com/song/media/outer/url?id=29431066.mp3',
+			title: '奇妙能力歌',
+			auther: '陈粒',
+			lrc:"[00:00.000] 作曲 : 陈粒\n[00:01.000] 作词 : 陈粒\n[00:20.312]我看过沙漠下暴雨\n[00:24.862]看过大海亲吻鲨鱼\n[00:29.113]看过黄昏追逐黎明\n[00:32.263]没看过你\n[00:37.664]我知道美丽会老去\n[00:41.765]生命之外还有生命\n[00:46.266]我知道风里有诗句\n[00:49.617]不知道你\n[00:55.169]我听过荒芜变成热闹\n[00:59.519]听过尘埃掩埋城堡\n[01:03.869]听过天空拒绝飞鸟\n[01:07.170]没听过你\n[01:12.621]我明白眼前都是气泡\n[01:16.721]安静的才是苦口良药\n[01:21.272]明白什么才让我骄傲\n[01:24.472]不明白你\n[01:30.273]我拒绝更好更圆的月亮\n[01:34.573]拒绝未知的疯狂\n[01:38.923]拒绝声色的张扬\n[01:42.240]不拒绝你\n[01:47.574]我变成荒凉的景象\n[01:51.976]变成无所谓的模样\n[01:55.777]变成透明的高墙\n[01:59.528]没能变成你\n[02:39.996]我听过空境的回忆\n[02:44.496]雨水浇绿孤山岭\n[02:48.746]听过被诅咒的秘密\n[02:52.490]没听过你\n[02:57.299]我抓住散落的欲望\n[03:01.649]缱绻的馥郁让我紧张\n[03:05.949]我抓住时间的假想\n[03:09.200]没抓住你\n[03:14.650]我包容六月清泉结冰\n[03:19.187]包容暮老的生命\n[03:23.489]包容世界的迟疑\n[03:26.789]没包容你\n[03:32.139]我忘了置身濒绝孤岛\n[03:36.640]忘了眼泪不过失效药\n[03:40.990]忘了百年无声口号\n[03:44.490]没能忘记你\n[03:49.791]我想要更好更圆的月亮\n[03:53.742]想要未知的疯狂\n[03:58.592]想要声色的张扬\n[04:02.142]我想要你",
+		}, {
+			src: 'http://music.163.com/song/media/outer/url?id=29535531.mp3',
+			title: '历历万乡',
+			auther: '陈粒',
+			lrc:"[00:00.000] 作曲 : 陈粒\n[00:01.000] 作词 : 陈南西\n[00:03.080]她住在七月的洪流上\n[00:06.490]天台倾倒理想一万丈\n[00:09.500]她午睡在北风仓皇途经的芦苇荡\n[00:17.830]她梦中的草原白茫茫\n[00:21.350]列车搭上悲欢去辗转\n[00:24.300]她尝遍了每个异乡限时赠送的糖\n[00:32.630]若我站在朝阳上 能否脱去昨日的惆怅\n[00:39.100]单薄语言能否传达我所有的牵挂\n[00:47.400]若有天我不复勇往 能否坚持走完这一场\n[00:53.850]踏遍万水千山总有一地故乡\n[01:02.140]城市慷慨亮整夜光\n[01:05.590]如同少年不惧岁月长\n[01:08.650]她想要的不多只是和别人的不一样\n[01:17.020]烛光倒影为我添茶\n[01:20.400]相逢太短不等茶水凉\n[01:23.350]你扔下的习惯还顽强活在我身上\n[01:31.640]若我站在朝阳上 能否脱去昨日的惆怅\n[01:38.170]单薄语言能否传达我所有的牵挂\n[01:46.500]若有天我不复勇往 能否坚持走完这一场\n[01:52.920]踏遍万水千山总有一地故乡\n[02:30.930]若我站在朝阳上 能否脱去昨日的惆怅\n[02:37.260]单薄语言能否传达我所有的牵挂\n[02:45.540]若有天我不复勇往 能否坚持走完这一场\n[02:51.910]踏遍万水千山总有一地故乡\n[03:00.560]她走在马蹄的余声中\n[03:03.760]夕阳燃烧离别多少场\n[03:06.680]她向陌生人们解说陌生人的风光\n[03:15.050]等她归来坐下对我讲\n[03:18.400]故人旧时容颜未沧桑\n[03:21.420]我们仍旧想要当初想要的不一样",
+		},{
+			src: 'http://music.163.com/song/media/outer/url?id=421423806.mp3',
+			title: '小半',
+			auther: '陈粒',	
+			lrc:"[00:00.000] 作曲 : 陈粒\n[00:00.120] 作词 : 涂玲子\n[00:00.360]不敢回看\n[00:01.960]左顾右盼不自然的暗自喜欢\n[00:06.340]偷偷搭讪总没完地坐立难安\n[00:10.530]试探说晚安 多空泛又心酸\n[00:17.090]低头呢喃\n[00:19.280]对你的偏爱太过于明目张胆\n[00:23.620]在原地打转的小丑伤心不断\n[00:28.000]空空留遗憾 多难堪又为难\n[00:34.260]释然 慵懒 尽欢 时间风干后你与我再无关\n[00:42.810]没答案 怎么办 看不惯自我欺瞒\n[00:51.330]纵容着 喜欢的 讨厌的 宠溺的 厌倦的\n[00:56.490]一个个慢慢黯淡\n[00:59.750]纵容着 任性的 随意的 放肆的 轻易的\n[01:05.130]将所有欢脱倾翻\n[01:08.530]不应该 太心软 不大胆 太死板 不果断\n[01:13.960]玩弄着肆无忌惮\n[01:17.190]不应该 舍弃了 死心了 放手了 断念了\n[01:22.640]无可奈何不耐烦\n[01:26.420]不算\n[01:31.500]灯火阑珊\n[01:33.670]我的心借了你的光是明是暗\n[01:37.810]笑自己情绪太泛滥形只影单\n[01:42.120]自嘲成习惯 多敏感又难缠\n[01:48.700]低头呢喃\n[01:50.930]对你的偏爱太过于明目张胆\n[01:55.240]在原地打转的小丑伤心不断\n[01:59.640]空空留遗憾 多难堪又为难\n[02:05.990]释然 慵懒 尽欢 时间风干后你与我再无关\n[02:14.650]没答案 怎么办 看不惯自我欺瞒\n[02:22.580]纵容着 喜欢的 讨厌的 宠溺的 厌倦的\n[02:28.210]一个个慢慢黯淡\n[02:31.210]纵容着 任性的 随意的 放肆的 轻易的\n[02:36.850]将所有欢脱倾翻\n[02:39.920]不应该 太心软 不大胆 太死板 不果断\n[02:45.570]玩弄着肆无忌惮\n[02:48.810]不应该 舍弃了 死心了 放手了 断念了\n[02:54.130]无可奈何不耐烦\n[03:15.150]任由着 你躲闪 我追赶 你走散 我呼喊\n[03:20.490]是谁在泛泛而谈\n[03:23.620]任由着 你来了 你笑了 你走了 不看我\n[03:29.060]与理所当然分摊\n[03:32.500]不明白 残存的 没用的 多余的 不必的\n[03:37.840]破烂也在手紧攥\n[03:41.050]不明白 谁赧然 谁无端 谁古板 谁极端\n[03:46.530]无辜不知所以然\n[03:49.930]纵容着 喜欢的 讨厌的 宠溺的 厌倦的（不管）\n[03:55.210]一个个慢慢黯淡\n[03:59.630]纵容着 任性的 随意的 放肆的 轻易的\n[04:03.990]将所有欢脱倾翻\n[04:07.520]不应该 太心软 不大胆 太死板 不果断\n[04:12.770]玩弄着肆无忌惮\n[04:15.950]不应该 舍弃了 死心了 放手了 断念了\n[04:21.470]无可奈何不耐烦",
+		},{
+			src: 'http://music.163.com/song/media/outer/url?id=29431061.mp3',
+			title: '绝对占有，相对自由',
+			auther: '陈粒',
+			lrc:"[00:00.000] 作曲 : 陈粒\n[00:01.000] 作词 : 陈粒\n[00:33.800]让我占有你\n[00:35.840]让我占有你在你最好的年纪\n[00:39.380]趁一切还崭新\n[00:42.260]让我占有你 占有你干净的心\n[00:45.850]温柔的声音\n[00:47.820]和完美柔软你的身体\n[00:52.540]身体里我全部的曾经\n[00:57.980]曾经\n[01:24.200]让我占有你\n[01:25.930]撕碎你然后像风握在我手里\n[01:29.540]抱着我像空气\n[01:32.070]想把你收集\n[01:34.210]泡你在福尔马林盯着你意淫\n[01:37.940]下半生的每个夜里\n[01:42.550]夜里你湿润赤裸\n[01:45.350]你眼睛\n[01:48.140]吞了我\n[01:56.960]山海的浩瀚\n[01:58.840]宇宙的浪漫\n[02:00.680]都在我内心翻腾\n[02:03.040]在推着我前进\n[02:05.170]移动的森林\n[02:07.090]伴着我行\n[02:08.460]对我眨眼睛\n[02:13.620]要陪你上岸\n[02:15.430]别的都不管\n[02:17.020]我要逆世界而行\n[02:19.920]我要化成灰烬\n[02:21.610]把你的路 铺平\n[03:03.990]我只属于你\n[03:06.170]我只属于你在这短暂的生命\n[03:09.760]随你自由来去\n[03:12.400]我只属于你\n[03:14.410]我大脑我的身体都要你住进\n[03:18.090]要你把我灵魂榨取\n[03:22.780]我的浪漫和极端都拿去\n[03:28.270]慢慢品\n[03:54.380]我只属于你\n[03:56.210]赞美你包容你都是我的使命\n[03:59.790]用一生去执行\n[04:02.490]想现在死去\n[04:04.560]时光记住我此刻坚决和笃定\n[04:08.140]让你永远觉得安心\n[04:12.830]世界纵然不会为此而停\n[04:18.290]但增添 你美丽\n[04:27.260]山海的浩瀚\n[04:29.210]宇宙的浪漫\n[04:30.760]都在我内心翻腾\n[04:33.420]在推着我前进\n[04:35.550]移动的森林\n[04:37.360]伴着我行\n[04:38.760]对我眨眼睛\n[04:43.880]要陪你上岸\n[04:45.710]别的都不管\n[04:47.400]我要逆世界而行\n[04:49.880]我要化成灰烬\n[04:52.150]把你的路 铺平",
+		},{
+			src: 'http://music.163.com/song/media/outer/url?id=421563711.mp3',
+			title: '芳草地',
+			auther: '陈粒',
+			lrc:"[00:00.000] 作曲 : 陈粒\n[00:01.000] 作词 : 陈南西\n[00:29.890]黯淡墙壁 挂住流星 陪伴寒夜里敞亮梦境\n[00:36.390]空手走进 白日雾气 笼络这世间平凡睡意\n[00:43.070]眼里停泊着万家灯火 嘴唇艳不过酉时日落\n[00:49.690]被时间辜负的不止一个\n[00:53.030]徒留我徘徊在原地\n[00:55.890]陪那片夜色\n[00:58.300]夜色任我沉默\n[01:02.200]任我思索\n[01:05.390]任我取舍\n[01:08.840]而你珍惜的\n[01:11.940]都不用分给我\n[01:14.980]尚未发生的\n[01:18.520]都早已转折\n[01:22.700]等我的脾气 都成为道理 谁还计较我几两情谊\n[01:29.560]道理空洞 情深意重 长出我一身无谓形容\n[01:36.330]往日思量 付之空谈 走一路捡一路的阑珊\n[01:42.920]活该落单 路遥车慢\n[01:46.270]春风扔我在城关\n[01:49.020]陪那片傍晚\n[01:51.690]傍晚由我评判\n[01:55.240]由我盘算\n[01:58.590]由我决断\n[02:02.060]而你珍惜的\n[02:04.890]都不要分给我\n[02:08.410]尚未发生的\n[02:11.680]都早已转折\n[02:43.140]珍惜自行珍惜\n[02:46.460]无常留给我浪费力气\n[02:49.850]等长夜付真心\n[02:52.610]在安静的芳草地",
+		}]
+
+
+		var audioObject = document.getElementById('music')
+		var sing_name=document.getElementById('sing-name')
+		var singer_name=document.getElementById('singer-name')
+		var tigger=document.getElementById('trigger')
+		var next=document.getElementById('next')
+		var loop=document.getElementById('loop')
+		var proce=document.getElementById('proce')
+		var current=document.getElementById('total')
+		
+
+		var musicIndex=0
+		var nowAudio
+		var currentTime
+		var duration
+		var withrange
+		var lrc
+		var timeReg = /\[\d{2}:\d{2}\.\d{3}\]/g
+		var lrc_time
+		var lrc_text
+
+		var initial=function()
+		{
+			audioObject.src=musicList[musicIndex].src
+			audioObject.play()
+			nowAudio=audioObject
+			sing_name.innerText=musicList[musicIndex].title
+			singer_name.innerText=musicList[musicIndex].auther
+			proce.disabled=false
+			proce.value=20
+			proce.max=500
+			withrange=true
+
+
+
+
+
+			lrc=musicList[musicIndex].lrc.split('\n')
+			lrc_time=[]
+			lrc_text=[]
+
+			//获取"时间数组"
+			for(var i in lrc)
+			{
+            var time=lrc[i].match(timeReg)//match方法用于按指定形式，挑选字符串的子串,并以数组形式返回
+            var time_min=parseInt(time[0].slice(1,3))//slice方法用于按指定区间，截取字符串的子串,并以数组形式返回
+            var time_sec=parseFloat(time[0].slice(4,10))
+            lrc_time.push(time_min*60+time_sec)
+        }
+
+    //获取"文本数组"
+    for(var i in lrc)
+    {
+      var text=lrc[i].replace(timeReg,"")//replace方法用于替换原字符串的部分内容
+      lrc_text.push(text)
+  }
+
+
+
+}
+
+var playNext=function()
+{
+	audioObject.pause()
+	musicIndex++
+	musicIndex=musicIndex%musicList.length
+	audioObject.src=musicList[musicIndex].src
+	sing_name.innerText=musicList[musicIndex].title
+	singer_name.innerText=musicList[musicIndex].auther
+	audioObject.play()
+	nowAudio=audioObject
+
+
+	lrc=musicList[musicIndex].lrc.split('\n')
+	lrc_time=[]
+	lrc_text=[]
+
+			//获取"时间数组"
+			for(var i in lrc)
+			{
+            var time=lrc[i].match(timeReg)//match方法用于按指定形式，挑选字符串的子串,并以数组形式返回
+            var time_min=parseInt(time[0].slice(1,3))//slice方法用于按指定区间，截取字符串的子串,并以数组形式返回
+            var time_sec=parseFloat(time[0].slice(4,10))
+            lrc_time.push(time_min*60+time_sec)
+        }
+
+    //获取"文本数组"
+    for(var i in lrc)
+    {
+      var text=lrc[i].replace(timeReg,"")//replace方法用于替换原字符串的部分内容
+      lrc_text.push(text)
+  }
+}
+
+var procedure=function(audio)
+{
+	proce.addEventListener('input', function()
+	{
+		withrange=false
+	})
+	proce.addEventListener('mouseup', function()
+	{
+		if(event.target==proce){
+			audioObject.currentTime=proce.value/proce.max*duration
+			current.innerText= parseInt(audio.currentTime / 60)+":"+parseInt(audio.currentTime % 60)
+			withrange=true
+		}
+	})
+
+	if(withrange)
+	{
+				//进度条处理
+				currentTime=audio.currentTime
+				duration=audio.duration
+				var percent=currentTime / duration
+				proce.value=percent*proce.max
+				current.innerText= parseInt(audio.currentTime / 60)+":"+parseInt(audio.currentTime % 60)
+
+                //歌词同步处理
+            }
+
+        var curTime = audio.currentTime;//获取当前的播放时间
+        for (var i=0;i<lrc.length;i++) {
+        	if ((curTime >lrc_time[i])&&(curTime<lrc_time[i+1])) {
+        		
+                 //播放时间大于对应歌词时间小于下一句歌词时间就显示当前歌词
+                 document.getElementById("lrc").innerHTML = lrc_text[i];
+                break;//找到对应歌词就停
+            }
+        }
+
+    }
+
+    tigger.onclick=function()
+    {
+    	if(this.innerText=="暂停")
+    	{
+    		audioObject.pause()
+    		this.innerText="播放"
+    	}
+    	else {
+
+    		audioObject.play()
+    		this.innerText="暂停"
+    	}  
+    }
+
+    next.onclick=function()
+    {
+    	playNext()
+    }
+
+    loop.onclick=function()
+    {
+    	if(this.innerText=="单曲循环")
+    	{
+
+    		this.innerText="列表循环"
+    		audioObject.loop = false
+    	}
+    	else {
+    		audioObject.loop = true
+    		this.innerText="单曲循环"	
+    	} 
+
+    }
+
+    audioObject.addEventListener('ended', function(){
+    	if(audioObject.loop==false){
+    		playNext()
+    	}
+
+    })
+    initial()
+
+    setInterval(function()
+    {
+    	procedure(nowAudio)
+    }, 100)
+
+</script>	
+</body>
+</html>
+
